@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="main_style.css">
+    <link rel="stylesheet" href="css/main_style.css">
+    <link rel="stylesheet" href="css/input_fields.css">
     <script src="js/appinfo.js"></script>
     <script src="js/accessToken.js"></script>
     <title>Spotify Song Recommender</title>
@@ -11,6 +12,46 @@
 
     <h1>Configure your search and get song recommendations</h1>
 
+    <div class="inputs">
+        <p>Configure your inputs below:</p>
+        <label>Acousticness (0-1):
+            <input id="acousticness">
+        </label>
+        <br>
+        <label>Danceability (0-1):
+            <input id="danceability">
+        </label>
+        <br>
+        <label>Liveness (0-1):
+            <input id="liveness">
+        </label>
+        <br>
+        <label>Energy (0-1):
+            <input id="energy">
+        </label>
+        <br>
+        <label>Positivity (0-1):
+            <input id="valence">
+        </label>
+        <br>
+        <label>Tempo (range or single value):
+            <input id="tempo">
+        </label>
+        <br>
+        <label>Category (can be list):
+            <input id="category">
+        </label>
+        <br>
+        <label>Genre(s):
+            <input id="genre">
+        </label>
+        <br>
+        <label>Playlist ID:
+            <input id="playlist_id">
+        </label>
+        <br>
+        <button onclick="runSearch()">Search</button>
+    </div>
 
 </body>
 </html>

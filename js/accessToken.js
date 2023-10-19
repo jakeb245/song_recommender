@@ -20,10 +20,10 @@ function getNewToken() {
     fetchToken().then((data) => {
         const accessToken = data.access_token;
         localStorage.setItem('token', accessToken);
+        console.log('access token = ' + accessToken);
         const token_dur = data.expires_in;
         const token_exp = Date.now() + (token_dur*1000)
         localStorage.setItem('token_exp', token_exp);
-        document.getElementById('token').innerHTML = "Access token: acquired";
     });
 }
 
@@ -36,8 +36,6 @@ function tokenCheck() {
         localStorage.removeItem('token_exp');
         getNewToken();
     }
-    else {
-        document.getElementById('token').innerHTML = "Access token: acquired";
-    }
 }
 
+tokenCheck();

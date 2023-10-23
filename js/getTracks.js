@@ -21,7 +21,7 @@ function getInputs() {
         }
         param_map.set(param, val);
     }
-    if ((param_map.get('category') === '') || (param_map.get('genre') === '') || (param_map.get('playlist_id') === '')) {
+    if ((param_map.get('category') === '') && (param_map.get('genre') === '') && (param_map.get('playlist_id') === '')) {
         error_text += 'You must supply a category, genre, or playlist ID';
     }
     if (error_text === '') {
@@ -33,5 +33,19 @@ function getInputs() {
         console.log(param_map);
         alert(error_text);
         return null;
+    }
+}
+
+async function getSampleTracks(params) {
+    if (params.get("playlist") != null) {
+        const tracks = await getPlaylist(params.get("playlist"));
+        console.log(tracks);
+    }
+}
+
+async function run() {
+    const inputs = getInputs();
+    if (inputs != null) {
+        let sample_tracks = await getSampleTracks(inputs);
     }
 }

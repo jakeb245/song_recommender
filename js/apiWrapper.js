@@ -21,6 +21,7 @@ async function getPlaylist(id) {
 
 async function getTrackInfo(id) {
     // gets all the info about a track (provided id)
+    
 }
 
 async function getTracksFromGenre(genre, nTracks) {

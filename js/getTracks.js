@@ -1,9 +1,9 @@
 
 function getInputs() {
     // TODO: Validate inputs
-    const params = ['acoustic', 'dance', 'live', 'energy',
+    const params = ['acoustic', 'dance', 'live', 'instrument', 'energy',
         'valence', 'tempo', 'popularity', 'category', 'genre', 'playlist'];
-    const num_params = ['acoustic', 'dance', 'live', 'energy',
+    const num_params = ['acoustic', 'dance', 'live', 'instrument', 'energy',
         'valence', 'popularity'];
     const param_map = new Map();
     let error_text = '';

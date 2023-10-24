@@ -1,6 +1,6 @@
 
 function getInputs() {
-    // TODO: Validate inputs
+    console.log("reading inputs");
     const params = ['acoustic', 'dance', 'live', 'instrument', 'energy',
         'valence', 'tempo', 'popularity', 'category', 'genre', 'playlist'];
     const num_params = ['acoustic', 'dance', 'live', 'instrument', 'energy',
@@ -25,7 +25,6 @@ function getInputs() {
         error_text += 'You must supply a category, genre, or playlist ID';
     }
     if (error_text === '') {
-        console.log(error_text);
         console.log(param_map);
         return param_map;
     }
@@ -37,15 +36,21 @@ function getInputs() {
 }
 
 async function getSampleTracks(params) {
+    let tracks = []
     if (params.get("playlist") != null) {
-        const tracks = await getPlaylist(params.get("playlist"));
-        console.log(tracks);
+        tracks = tracks.concat(await getPlaylist(params.get("playlist")));
     }
+    else {
+    }
+    return tracks;
+    // TODO: add category and genre input handling
 }
 
 async function run() {
     const inputs = getInputs();
     if (inputs != null) {
         let sample_tracks = await getSampleTracks(inputs);
+        console.log(sample_tracks);
+        const tracks_info = await getTracksInfo(sample_tracks);
     }
 }

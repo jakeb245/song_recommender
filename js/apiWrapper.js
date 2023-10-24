@@ -46,12 +46,13 @@ async function getTracksInfo(track_ids) {
     let tracks_searched = 0;
     while (tracks_searched < n_tracks) {
         console.log(`looping: tracks searched = ${tracks_searched}, n_tracks = ${n_tracks}`);
+        let subset;
         if (tracks_searched + 100 <= n_tracks) {
-            let subset = track_ids.slice(tracks_searched, tracks_searched+100);
+            subset = track_ids.slice(tracks_searched, tracks_searched+100);
             tracks_searched += 100;
         }
         else {
-            let subset = track_ids.slice(tracks_searched, n_tracks-1);
+            subset = track_ids.slice(tracks_searched, n_tracks-1);
             tracks_searched += (n_tracks - tracks_searched);
         }
         let ids_to_search = subset.join(',');

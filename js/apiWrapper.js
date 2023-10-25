@@ -21,7 +21,7 @@ async function getPlaylist(id) {
         tracks = tracks.concat(toAdd);
         // If end-loop condition not met, get new tracks
         if (tracks.length < playlist_obj.total) {
-            url = `https://api.spotify.com/v1/playlists/${id}/tracks?offset=${tracks.length}`
+            url = `https://api.spotify.com/v1/playlists/${id}/tracks?offset=${tracks.length-1}`
             response = await fetch(url, {
                 method: "GET",
                 headers: {

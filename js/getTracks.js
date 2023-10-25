@@ -51,5 +51,6 @@ async function run() {
         const tracks_info = await getTracksInfo(sample_tracks);
         console.log(tracks_info);
         const best_matches = findBestMatch(tracks_info, inputs);
+        console.log(best_matches);
     }
 }

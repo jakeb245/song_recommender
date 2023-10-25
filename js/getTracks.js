@@ -2,7 +2,7 @@
 function getInputs() {
     console.log("reading inputs");
     const params = ['acoustic', 'dance', 'live', 'instrument', 'energy',
-        'valence', 'tempo', 'popularity', 'category', 'genre', 'playlist'];
+        'valence', 'popularity', 'category', 'genre', 'playlist'];
     const num_params = ['acoustic', 'dance', 'live', 'instrument', 'energy',
         'valence', 'popularity'];
     const param_map = new Map();

@@ -10,7 +10,6 @@ async function getPlaylist(id) {
         }
     });
     let playlist_obj = await response.json();
-    console.log(playlist_obj);
     const total = playlist_obj.total
     // Return list of track ids
     let toAdd, i;
@@ -20,11 +19,9 @@ async function getPlaylist(id) {
             toAdd[i] = playlist_obj.items[i].track.id;
         }
         tracks = tracks.concat(toAdd);
-        console.log(tracks);
         // If end-loop condition not met, get new tracks
         if (tracks.length < playlist_obj.total) {
             url = `https://api.spotify.com/v1/playlists/${id}/tracks?offset=${tracks.length}`
-            console.log(url);
             response = await fetch(url, {
                 method: "GET",
                 headers: {
@@ -32,7 +29,6 @@ async function getPlaylist(id) {
                 }
             });
             playlist_obj = await response.json();
-            console.log(playlist_obj);
         }
     }
     return tracks;
@@ -56,7 +52,6 @@ async function getTracksInfo(track_ids) {
             tracks_searched += (n_tracks - tracks_searched);
         }
         let ids_to_search = subset.join(',');
-        console.log(ids_to_search);
         let url = `https://api.spotify.com/v1/audio-features?ids=${ids_to_search}`;
         let response = await fetch(url, {
             method: "GET",
@@ -65,7 +60,6 @@ async function getTracksInfo(track_ids) {
             }
         });
         let tracks = await response.json();
-        console.log(tracks);
         track_info = track_info.concat(tracks);
     }
     return track_info;

@@ -25,11 +25,9 @@ function getInputs() {
         error_text += 'You must supply a category, genre, or playlist ID';
     }
     if (error_text === '') {
-        console.log(param_map);
         return param_map;
     }
     else {
-        console.log(param_map);
         alert(error_text);
         return null;
     }
@@ -50,7 +48,8 @@ async function run() {
     const inputs = getInputs();
     if (inputs != null) {
         let sample_tracks = await getSampleTracks(inputs);
-        console.log(sample_tracks);
         const tracks_info = await getTracksInfo(sample_tracks);
+        console.log(tracks_info);
+        const best_matches = findBestMatch(tracks_info, inputs);
     }
 }

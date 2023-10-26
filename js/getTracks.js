@@ -57,5 +57,12 @@ async function run() {
         console.log(tracks_info);
         const best_matches = findBestMatch(tracks_info, inputs);
         console.log(best_matches);
+        const match_ids = []
+        for (let i = 0; i < best_matches.length; i++) {
+            match_ids[i] = best_matches[i][1][0];
+        }
+        console.log(match_ids);
+        const best_match_info = await getTracksGeneralInfo(match_ids)
+        console.log(best_match_info);
     }
 }

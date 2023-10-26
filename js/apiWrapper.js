@@ -74,6 +74,7 @@ async function getTracksFromCategory(category, n_tracks) {
 }
 
 async function getTracksGeneralInfo(track_ids) {
+    // given ids, return an array of maps of track name, artist, album, artwork, url per track
     const track_id_string = track_ids.join(',');
     const url = `https://api.spotify.com/v1/tracks?ids=${track_id_string}`;
     const response = await fetch(url, {
@@ -82,6 +83,29 @@ async function getTracksGeneralInfo(track_ids) {
             'Authorization' : `Bearer ${localStorage.getItem("token")}`
         }
     });
-    const tracks = await response.json();
-    return tracks;
+    const tracks_obj = await response.json();
+
+    const track_info = [];
+
+    console.log(tracks_obj.tracks);
+
+
+    for (let i = 0; i < tracks_obj.tracks.length; i++) {
+        track_info[i] = new Map();
+        // track name easy
+        track_info[i].set('name', tracks_obj.tracks[i].name);
+        // artists can be an array so break it down into a string joined by ' and '
+        let artists = [];
+        for (let j = 0; j < tracks_obj.tracks[i].artists.length; j++) {
+            artists[j] = tracks_obj.tracks[i].artists[j].name;
+        }
+        track_info[i].set('artist', artists.join(' and '));
+        // album easy
+        track_info[i].set('album', tracks_obj.tracks[i].album.name);
+        // artwork url
+        track_info[i].set('artwork', tracks_obj.tracks[i].album.images[0].url);
+        track_info[i].set('spotify_url', tracks_obj.tracks[i].external_urls['spotify']);
+    }
+
+    return track_info;
 }

@@ -29,9 +29,6 @@ function findBestMatch(track_features, params) {
                 input_val = parseFloat(params.get(param));
                 if (!isNaN(input_val)) {
                     match += Math.pow(track[param] - input_val, 2)
-                    if (isNaN(match)) {
-                        console.log(param);
-                    }
                 }
             }
             match /= n_params;

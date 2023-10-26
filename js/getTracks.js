@@ -4,7 +4,7 @@ function getInputs() {
     const params = ['acoustic', 'dance', 'live', 'instrument', 'energy',
         'valence', 'popularity', 'category', 'genre', 'playlist'];
     const num_params = ['acoustic', 'dance', 'live', 'instrument', 'energy',
-        'valence', 'popularity'];
+        'valence'];
     const param_map = new Map();
     let error_text = '';
     for (const param of params) {
@@ -44,11 +44,16 @@ async function getSampleTracks(params) {
     // TODO: add category and genre input handling
 }
 
+function displayTracks(track_info) {
+
+}
+
 async function run() {
     const inputs = getInputs();
+    console.log(inputs);
     if (inputs != null) {
         let sample_tracks = await getSampleTracks(inputs);
-        const tracks_info = await getTracksInfo(sample_tracks);
+        const tracks_info = await getTracksFeatures(sample_tracks);
         console.log(tracks_info);
         const best_matches = findBestMatch(tracks_info, inputs);
         console.log(best_matches);

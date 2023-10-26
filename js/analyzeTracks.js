@@ -7,7 +7,7 @@ function findBestMatch(track_features, params) {
     // Pick the best 3 tracks
 
     const num_params = ['acousticness', 'danceability', 'liveness', 'instrumentalness', 'energy',
-        'valence', 'popularity'];
+        'valence'];
 
     let match, input_val, n_params;
 
@@ -29,6 +29,9 @@ function findBestMatch(track_features, params) {
                 input_val = parseFloat(params.get(param));
                 if (!isNaN(input_val)) {
                     match += Math.pow(track[param] - input_val, 2)
+                    if (isNaN(match)) {
+                        console.log(param);
+                    }
                 }
             }
             match /= n_params;
@@ -36,6 +39,8 @@ function findBestMatch(track_features, params) {
             track_match_map.set(track.id, match);
         }
     }
+
+    console.log(track_match_map);
 
     // Find top 3 matches from the map
     // Sort by value
@@ -54,5 +59,5 @@ function findBestMatch(track_features, params) {
         top_three.push(entry.value);
     }
 
-    return new Map(top_three);
+    return top_three;
 }

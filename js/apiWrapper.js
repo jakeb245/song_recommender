@@ -34,7 +34,7 @@ async function getPlaylist(id) {
     return tracks;
 }
 
-async function getTracksInfo(track_ids) {
+async function getTracksFeatures(track_ids) {
     // gets all the info about a track (provided id)
     console.log("getting tracks info");
     let track_info = [];
@@ -71,4 +71,17 @@ async function getTracksFromGenre(genre, n_tracks) {
 
 async function getTracksFromCategory(category, n_tracks) {
     // given a category, pulls playlists until list of tracks length (nTracks) is retrieved
+}
+
+async function getTracksGeneralInfo(track_ids) {
+    const track_id_string = track_ids.join(',');
+    const url = `https://api.spotify.com/v1/tracks?ids=${track_id_string}`;
+    const response = await fetch(url, {
+        method: "GET",
+        headers: {
+            'Authorization' : `Bearer ${localStorage.getItem("token")}`
+        }
+    });
+    const tracks = await response.json();
+    return tracks;
 }

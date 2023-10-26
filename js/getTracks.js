@@ -45,7 +45,8 @@ async function getSampleTracks(params) {
 }
 
 function displayTracks(track_info) {
-
+    // Display the tracks on the webpage
+    // Will require learning some more HTML + CSS for sure
 }
 
 async function run() {
@@ -64,5 +65,7 @@ async function run() {
         console.log(match_ids);
         const best_match_info = await getTracksGeneralInfo(match_ids)
         console.log(best_match_info);
+        displayTracks(best_match_info);
+        // TODO: Display results on the webpage
     }
 }

@@ -47,6 +47,10 @@ async function getSampleTracks(params) {
 function displayTracks(track_info) {
     // Display the tracks on the webpage
     // Will require learning some more HTML + CSS for sure
+    for (let i = 0; i < 3; i++) {
+        document.getElementById(`name${i}`).innerHTML = track_info[i].get("name");
+        document.getElementById(`artist${i}`).innerHTML = track_info[i].get("artist");
+    }
 }
 
 async function run() {

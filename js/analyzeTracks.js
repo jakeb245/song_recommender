@@ -9,7 +9,7 @@ function findBestMatch(track_features, params) {
     const num_params = ['acousticness', 'danceability', 'liveness', 'instrumentalness', 'energy',
         'valence'];
 
-    let match, input_val, n_params;
+    let diff, input_val, n_params;
 
     n_params = 0;
     // get n_params
@@ -24,16 +24,16 @@ function findBestMatch(track_features, params) {
     // Each search has its own features object, so loop through those
     for (let track_set of track_features) {
         for (let track of track_set.audio_features) {
-            match = 0;
+            diff = 0;
             for (let param of num_params) {
                 input_val = parseFloat(params.get(param));
                 if (!isNaN(input_val)) {
-                    match += Math.pow(track[param] - input_val, 2)
+                    diff += Math.pow(track[param] - input_val, 2)
                 }
             }
-            match /= n_params;
-            match = Math.sqrt(match);
-            track_match_map.set(track.id, match);
+            diff /= n_params;
+            diff = Math.sqrt(diff);
+            track_match_map.set(track.id, diff);
         }
     }
 
@@ -42,7 +42,7 @@ function findBestMatch(track_features, params) {
     // Find top 3 matches from the map
     // Sort by value
     const tracks_sorted = Array.from(track_match_map.entries()).sort(
-        (a,b)=> b[1] - a[1])
+        (a,b)=> a[1] - b[1])
 
     const top_three = [];
     const entries = tracks_sorted.entries();

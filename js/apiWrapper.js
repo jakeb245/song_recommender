@@ -71,6 +71,26 @@ async function getTracksFromGenre(genre, n_tracks) {
 
 async function getTracksFromCategory(category, n_tracks) {
     // given a category, pulls playlists until list of tracks length (nTracks) is retrieved
+    const test = await checkCategoryExists(category);
+}
+
+async function getCategoryId(category) {
+    console.log('checking if category exists')
+    let url = `https://api.spotify.com/v1/browse/categories/${category}`;
+    let response = await fetch(url, {
+        method: "GET",
+        headers: {
+            'Authorization' : `Bearer ${localStorage.getItem("token")}`
+        }
+    });
+    let obj = await response.json();
+    if (Object.hasOwn(obj, 'error')) {
+        alert(`Error: status code ${obj.error.status}`);
+        return null;
+    }
+    else {
+        return obj.id;
+    }
 }
 
 async function getTracksGeneralInfo(track_ids) {

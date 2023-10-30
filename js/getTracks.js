@@ -2,7 +2,7 @@
 function getInputs() {
     console.log("reading inputs");
     const params = ['acoustic', 'dance', 'live', 'instrument', 'energy',
-        'valence', 'popularity', 'category', 'genre', 'playlist'];
+        'valence', 'category', 'playlist'];
     const num_params = ['acoustic', 'dance', 'live', 'instrument', 'energy',
         'valence'];
     const param_map = new Map();
@@ -15,14 +15,10 @@ function getInputs() {
                 error_text += `${param} must be [0-1]\n`
             }
         }
-        if ((param === "tempo") && (val.includes('-'))) {
-            const tempos = val.split('-');
-            val = [parseFloat(tempos[0]), parseFloat(tempos[1])]
-        }
         param_map.set(param, val);
     }
-    if ((param_map.get('category') === '') && (param_map.get('genre') === '') && (param_map.get('playlist_id') === '')) {
-        error_text += 'You must supply a category, genre, or playlist ID';
+    if ((param_map.get('category') === '') && (param_map.get('playlist_id') === '')) {
+        error_text += 'You must supply a category or playlist ID';
     }
     if (error_text === '') {
         return param_map;
@@ -35,13 +31,16 @@ function getInputs() {
 
 async function getSampleTracks(params) {
     let tracks = []
-    if (params.get("playlist") != null) {
+    if (params.get("playlist") !== '') {
         tracks = tracks.concat(await getPlaylist(params.get("playlist")));
     }
     else {
+        // Must be category
+        const category = params.get('category');
+        console.log(category);
+        tracks = tracks.concat(await getTracksFromCategory(category));
     }
     return tracks;
-    // TODO: add category and genre input handling
 }
 
 function displayTracks(track_info) {

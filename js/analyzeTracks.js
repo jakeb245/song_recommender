@@ -58,3 +58,7 @@ function findBestMatch(track_features, params) {
 
     return top_three;
 }
+
+function plotDiffDistribution(diff) {
+    // plot a probability distribution of the difference values
+}

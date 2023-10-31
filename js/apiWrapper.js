@@ -65,13 +65,27 @@ async function getTracksFeatures(track_ids) {
     return track_info;
 }
 
-async function getTracksFromGenre(genre, n_tracks) {
-    // given a genre, pulls playlists until list of tracks length (nTracks) is retrieved
-}
-
-async function getTracksFromCategory(category, n_tracks) {
-    // given a category, pulls playlists until list of tracks length (nTracks) is retrieved
-    const test = await checkCategoryExists(category);
+async function getTracksFromCategory(category) {
+    // given a category, pulls 50 playlists and returns list of track IDs
+    const category_id = await getCategoryId(category);
+    // ignoring the null case
+    // get category's playlists
+    let url = `https://api.spotify.com/v1/browse/categories/${category_id}/playlists?limit=50`
+    let response = await fetch(url, {
+        method: "GET",
+        headers: {
+            'Authorization' : `Bearer ${localStorage.getItem("token")}`
+        }
+    });
+    let playlists_obj = await response.json();
+    let tracks = [];
+    for (let i = 0; i < playlists_obj.total; i++) {
+        let id = playlists_obj.items[i].id;
+        let list_tracks = await getPlaylist(id);
+        tracks = tracks.concat(list_tracks);
+    }
+    tracks = tracks.flat();
+    return tracks;
 }
 
 async function getCategoryId(category) {

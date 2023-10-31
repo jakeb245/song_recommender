@@ -87,6 +87,8 @@ async function getTracksFromCategory(category) {
         tracks = tracks.concat(list_tracks);
     }
     tracks = tracks.flat();
+    // remove duplicate tracks
+    tracks = [...new Set(tracks)];
     return tracks;
 }
 

@@ -78,9 +78,11 @@ async function getTracksFromCategory(category) {
         }
     });
     let playlists_obj = await response.json();
+    console.log(playlists_obj);
     let tracks = [];
-    for (let i = 0; i < playlists_obj.total; i++) {
-        let id = playlists_obj.items[i].id;
+    for (let i = 0; i < playlists_obj.playlists.total; i++) {
+        let id = playlists_obj.playlists.items[i].id;
+        console.log(id)
         let list_tracks = await getPlaylist(id);
         tracks = tracks.concat(list_tracks);
     }

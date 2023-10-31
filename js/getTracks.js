@@ -30,15 +30,15 @@ function getInputs() {
 }
 
 async function getSampleTracks(params) {
-    let tracks = []
+    let tracks;
     if (params.get("playlist") !== '') {
-        tracks = tracks.concat(await getPlaylist(params.get("playlist")));
+        tracks = await getPlaylist(params.get("playlist"));
     }
     else {
         // Must be category
         const category = params.get('category');
         console.log(category);
-        tracks = tracks.concat(await getTracksFromCategory(category));
+        tracks = await getTracksFromCategory(category);
     }
     return tracks;
 }
@@ -57,6 +57,7 @@ async function run() {
     console.log(inputs);
     if (inputs != null) {
         let sample_tracks = await getSampleTracks(inputs);
+        console.log(sample_tracks);
         const tracks_info = await getTracksFeatures(sample_tracks);
         console.log(tracks_info);
         const best_matches = findBestMatch(tracks_info, inputs);

@@ -45,10 +45,15 @@ async function getSampleTracks(params) {
 
 function displayTracks(track_info) {
     // Display the tracks on the webpage
-    // Will require learning some more HTML + CSS for sure
+    // Use an HTML frame within the results div (.results CSS class)
+    let track_div;
     for (let i = 0; i < 3; i++) {
-        document.getElementById(`name${i}`).innerHTML = track_info[i].get("name");
-        document.getElementById(`artist${i}`).innerHTML = track_info[i].get("artist");
+        track_div = document.createElement('div');
+        track_div.innerHTML += `<img src="${track_info[i].get('artwork')}" alt="Band photo"><br>`;
+        track_div.innerHTML += `<h3 id="title">${track_info[i].get('name')}</h3><br>`;
+        track_div.innerHTML += `<p id="artist">${track_info[i].get('artist')}</p><br>`;
+        track_div.innerHTML += `<p id="album">${track_info[i].get('album')}</p>`;
+        document.body.appendChild(track_div);
     }
 }
 

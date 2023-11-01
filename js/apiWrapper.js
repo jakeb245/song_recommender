@@ -10,13 +10,15 @@ async function getPlaylist(id) {
         }
     });
     let playlist_obj = await response.json();
-    const total = playlist_obj.total
+    const total = playlist_obj.total;
     // Return list of track ids
     let toAdd, i;
     while (tracks.length < total) {
         toAdd = [];
         for (i = 0; i < playlist_obj.items.length; i++) {
-            toAdd[i] = playlist_obj.items[i].track.id;
+            if (playlist_obj.items[i].track !== null) {
+                toAdd[i] = playlist_obj.items[i].track.id;
+            }
         }
         tracks = tracks.concat(toAdd);
         // If end-loop condition not met, get new tracks
@@ -80,9 +82,8 @@ async function getTracksFromCategory(category) {
     let playlists_obj = await response.json();
     console.log(playlists_obj);
     let tracks = [];
-    for (let i = 0; i < playlists_obj.playlists.total; i++) {
+    for (let i = 0; i < playlists_obj.playlists.items.length; i++) {
         let id = playlists_obj.playlists.items[i].id;
-        console.log(id)
         let list_tracks = await getPlaylist(id);
         tracks = tracks.concat(list_tracks);
     }

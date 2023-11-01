@@ -2,7 +2,7 @@ body {
     background-color: dimgray;
 }
 
-h1, h2, h3 {
+h1, h2, h3, p {
     font-family: Helvetica, sans-serif;
     text-align: center;
     color: white;

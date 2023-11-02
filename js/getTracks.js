@@ -47,17 +47,28 @@ function displayTracks(track_info) {
     // Display the tracks on the webpage
     // Use an HTML frame within the results div (.results CSS class)
     let track_div;
+    let results_div = document.createElement('div');
+    results_div.id = 'results';
+    results_div.className = 'results';
     for (let i = 0; i < 3; i++) {
         track_div = document.createElement('div');
+        track_div.id = `track${i}`
         track_div.innerHTML += `<img src="${track_info[i].get('artwork')}" alt="Band photo"><br>`;
         track_div.innerHTML += `<h3 id="title">${track_info[i].get('name')}</h3><br>`;
         track_div.innerHTML += `<p id="artist">${track_info[i].get('artist')}</p><br>`;
         track_div.innerHTML += `<p id="album">${track_info[i].get('album')}</p>`;
-        document.body.appendChild(track_div);
+        results_div.appendChild(track_div);
     }
+    document.body.appendChild(results_div);
+
 }
 
 async function run() {
+    if (document.getElementById('results')) {
+        console.log('clearing results')
+        let results_div = document.getElementById('results')
+        results_div.remove();
+    }
     const inputs = getInputs();
     console.log(inputs);
     if (inputs != null) {

@@ -53,7 +53,7 @@ function displayTracks(track_info) {
     for (let i = 0; i < 3; i++) {
         track_div = document.createElement('div');
         track_div.id = `track${i}`
-        track_div.innerHTML += `<img src="${track_info[i].get('artwork')}" alt="Band photo"><br>`;
+        track_div.innerHTML += `<img src="${track_info[i].get('artwork')}" alt="Band photo" width=250px height=250px><br>`;
         track_div.innerHTML += `<h3 id="title">${track_info[i].get('name')}</h3><br>`;
         track_div.innerHTML += `<p id="artist">${track_info[i].get('artist')}</p><br>`;
         track_div.innerHTML += `<p id="album">${track_info[i].get('album')}</p>`;
@@ -86,6 +86,5 @@ async function run() {
         const best_match_info = await getTracksGeneralInfo(match_ids)
         console.log(best_match_info);
         displayTracks(best_match_info);
-        // TODO: Display results on the webpage
     }
 }

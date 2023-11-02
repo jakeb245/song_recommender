@@ -24,11 +24,14 @@ function findBestMatch(track_features, params) {
     // Each search has its own features object, so loop through those
     for (let track_set of track_features) {
         for (let track of track_set.audio_features) {
+            if (track == null) {
+                continue;
+            }
             diff = 0;
             for (let param of num_params) {
                 input_val = parseFloat(params.get(param));
                 if (!isNaN(input_val)) {
-                    diff += Math.pow(track[param] - input_val, 2)
+                    diff += Math.pow(track[param] - input_val, 2);
                 }
             }
             diff /= n_params;

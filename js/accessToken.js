@@ -38,4 +38,4 @@ function tokenCheck() {
     }
 }
 
-tokenCheck();
+tokenCheck()  // If using client credentials flow, uncomment this

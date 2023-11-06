@@ -2,7 +2,7 @@
 async function fetchToken() {
     let params = new URLSearchParams();
     params.append("grant_type", "client_credentials");
-    params.append("client_id", client_id);
+    params.append("client_id", clientId);
     params.append("client_secret", client_secret);
     const response = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',

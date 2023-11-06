@@ -64,9 +64,10 @@ function displayTracks(track_info) {
 }
 
 async function run() {
-    console.log(`access token = ${localStorage.getItem("access_token")}`)
+    tokenCheck();
+    console.log(`access token = ${localStorage.getItem("token")}`)
     if (document.getElementById('results')) {
-        console.log('clearing results')
+        console.log('clearing results');
         let results_div = document.getElementById('results')
         results_div.remove();
     }

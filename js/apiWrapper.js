@@ -83,6 +83,7 @@ async function getTracksFromCategory(category) {
     console.log(playlists_obj);
     let tracks = [];
     for (let i = 0; i < playlists_obj.playlists.items.length; i++) {
+        if (playlists_obj.playlists.items[i] == null) continue;
         let id = playlists_obj.playlists.items[i].id;
         let list_tracks = await getPlaylist(id);
         tracks = tracks.concat(list_tracks);

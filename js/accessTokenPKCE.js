@@ -15,7 +15,7 @@ async function redirectToAuthCodeFlow(clientId) {
     document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
 
-async function getAccessToken(clientId, code) {
+async function fetchAccessTokenPKCE(clientId, code) {
     const verifier = localStorage.getItem("verifier");
 
     const params = new URLSearchParams();
@@ -61,21 +61,29 @@ async function getNewTokenPKCE() {
     if (!code) {
         await redirectToAuthCodeFlow(clientId);
     } else {
-        const accessToken = await getAccessToken(clientId, code);
-        localStorage.setItem("token_pkce", accessToken);
-        const token_dur = data.expires_in;
-        const token_exp = Date.now() + (token_dur*1000)
-        localStorage.setItem('token_exp_pkce', token_exp);
+        fetchAccessTokenPKCE(clientId, code).then((data) => {
+            const accessToken = data.access_token;
+            localStorage.setItem('token_pkce', accessToken);
+            console.log('access token (pkce) = ' + accessToken);
+            const token_dur = data.expires_in;
+            const token_exp = Date.now() + (token_dur*1000)
+            localStorage.setItem('token_exp_pkce', token_exp.toString());
+        });
     }
 }
 
-function tokenCheckPKCE() {
-    if (localStorage.getItem('token_pkce') == null) {
-        getNewTokenPKCE();
+async function tokenCheckPKCE() {
+    console.log("checking token")
+    if ((localStorage.getItem('token_pkce') == null) || ((localStorage.getItem('token_pkce') === 'undefined'))) {
+        console.log("token is null")
+        await getNewTokenPKCE();
     }
     else if (Date.now() > localStorage.getItem('token_exp_pkce')) {
         localStorage.removeItem('token_pkce');
         localStorage.removeItem('token_exp_pkce');
-        getNewTokenPKCE();
+        await getNewTokenPKCE();
+    }
+    else {
+        console.log("access token is", localStorage.getItem("token_pkce"))
     }
 }

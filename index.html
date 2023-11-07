@@ -25,9 +25,10 @@
         <label>Positivity (0-1): <input type="text" id="valence"></label><br>
         <label>Category(s): <input type="text" id="category"></label><br>
         <label>Playlist ID(s): <input type="text" id="playlist"></label><br>
-        <button onclick="run()">Search</button>
-    </div>
+        <button onclick="run()">Search</button><br>
+        <button onclick="tokenCheckPKCE()" id="authenticate">Authenticate Spotify Account</button>
 
+    </div>
     <br>
 
     <div class="results" id="results">

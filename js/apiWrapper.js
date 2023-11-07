@@ -154,7 +154,6 @@ async function getTracksGeneralInfo(track_ids) {
 // Player functions
 async function addTrackToQueue(id) {
     // Adds a track to the users queue
-    tokenCheckPKCE();
     let url = `https://api.spotify.com/v1/me/player/queue?uri=${id}`;
     let response = await fetch(url, {
         method: "POST",

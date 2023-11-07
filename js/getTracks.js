@@ -57,8 +57,12 @@ function displayTracks(track_info) {
         track_div.innerHTML += `<h3 id="title" class="track_info">${track_info[i].get('name')}</h3><br>`;
         track_div.innerHTML += `<p id="artist" class="track_info">${track_info[i].get('artist')}</p><br>`;
         track_div.innerHTML += `<p id="album" class="track_info">${track_info[i].get('album')}</p>`;
-        track_div.innerHTML += `<button id="queue" class="track_info"
-            onclick="addTrackToQueue(${track_info.get('uri')})">Add track to queue</button>`
+        const queue_button = document.createElement("button");
+        queue_button.onclick = async () => {
+            await addTrackToQueue(track_info[i].get('uri'));
+        }
+        queue_button.innerHTML = "Add to queue";
+        track_div.appendChild(queue_button);
         results_div.appendChild(track_div);
     }
     document.body.appendChild(results_div);

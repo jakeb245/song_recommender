@@ -54,7 +54,7 @@ async function generateCodeChallenge(codeVerifier) {
         .replace(/=+$/, '');
 }
 
-async function tokenCheckPKCE() {
+async function getNewTokenPKCE() {
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
 
@@ -62,6 +62,20 @@ async function tokenCheckPKCE() {
         await redirectToAuthCodeFlow(clientId);
     } else {
         const accessToken = await getAccessToken(clientId, code);
-        localStorage.setItem("access_token_pkce", accessToken);
+        localStorage.setItem("token_pkce", accessToken);
+        const token_dur = data.expires_in;
+        const token_exp = Date.now() + (token_dur*1000)
+        localStorage.setItem('token_exp_pkce', token_exp);
+    }
+}
+
+function tokenCheckPKCE() {
+    if (localStorage.getItem('token_pkce') == null) {
+        getNewTokenPKCE();
+    }
+    else if (Date.now() > localStorage.getItem('token_exp_pkce')) {
+        localStorage.removeItem('token_pkce');
+        localStorage.removeItem('token_exp_pkce');
+        getNewTokenPKCE();
     }
 }

@@ -45,7 +45,7 @@ function findBestMatch(track_features, params) {
     // Find top 3 matches from the map
     // Sort by value
     const tracks_sorted = Array.from(track_match_map.entries()).sort(
-        (a,b)=> a[1] - b[1])
+        (a,b)=> a[1] - b[1]);
 
     const top_three = [];
     const entries = tracks_sorted.entries();

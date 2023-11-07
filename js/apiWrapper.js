@@ -145,6 +145,7 @@ async function getTracksGeneralInfo(track_ids) {
         // artwork url
         track_info[i].set('artwork', tracks_obj.tracks[i].album.images[0].url);
         track_info[i].set('spotify_url', tracks_obj.tracks[i].external_urls['spotify']);
+        track_info[i].set('uri', tracks_obj.tracks[i].id);
     }
 
     return track_info;
@@ -156,7 +157,7 @@ async function addTrackToQueue(id) {
     tokenCheckPKCE();
     let url = `https://api.spotify.com/v1/me/player/queue?uri=${id}`;
     let response = await fetch(url, {
-        method: "GET",
+        method: "POST",
         headers: {
             'Authorization' : `Bearer ${localStorage.getItem("token_pkce")}`
         }

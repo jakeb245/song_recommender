@@ -149,3 +149,20 @@ async function getTracksGeneralInfo(track_ids) {
 
     return track_info;
 }
+
+// Player functions
+async function addTrackToQueue(id) {
+    // Adds a track to the users queue
+    tokenCheckPKCE();
+    let url = `https://api.spotify.com/v1/me/player/queue?uri=${id}`;
+    let response = await fetch(url, {
+        method: "GET",
+        headers: {
+            'Authorization' : `Bearer ${localStorage.getItem("token_pkce")}`
+        }
+    });
+    let obj = await response.json();
+    if (obj.error) {
+        alert("error queuing track")
+    }
+}

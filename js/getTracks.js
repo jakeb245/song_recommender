@@ -47,9 +47,7 @@ function displayTracks(track_info) {
     // Display the tracks on the webpage
     // Use an HTML frame within the results div (.results CSS class)
     let track_div;
-    let results_div = document.createElement('div');
-    results_div.id = 'results';
-    results_div.className = 'results';
+    let results_div = document.getElementById("results_div");
     for (let i = 0; i < 3; i++) {
         track_div = document.createElement('div');
         track_div.id = `track${i}`

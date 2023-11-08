@@ -1,4 +1,4 @@
-import Plotly from "plotly.js-dist";
+//import Plotly from "plotly.js-dist";
 
 function findBestMatch(track_features, params) {
     // Given a bunch of tracks' features and some parameters, find the closest match
@@ -64,14 +64,14 @@ function findBestMatch(track_features, params) {
     return top_three;
 }
 
-function plotDiffDistribution(diff) {
-    // plot a probability distribution of the difference values
-    const diff_hist_div = document.createElement("div");
-    diff_hist_div.id = 'diff_dist'
-    document.body.appendChild(diff_hist_div);
-    const data = {
-        x: diff,
-        type: 'histogram'
-    };
-    Plotly.newPlot(diff_hist_div, [data]);
-}
+// function plotDiffDistribution(diff) {
+//     // plot a probability distribution of the difference values
+//     const diff_hist_div = document.createElement("div");
+//     diff_hist_div.id = 'diff_dist'
+//     document.body.appendChild(diff_hist_div);
+//     const data = {
+//         x: diff,
+//         type: 'histogram'
+//     };
+//     Plotly.newPlot(diff_hist_div, [data]);
+// }

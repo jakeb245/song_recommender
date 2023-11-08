@@ -17,6 +17,7 @@ async function redirectToAuthCodeFlow(clientId) {
 
 async function fetchAccessTokenPKCE(clientId, code) {
     const verifier = localStorage.getItem("verifier");
+    console.log('verifier', verifier);
 
     const params = new URLSearchParams();
     params.append("client_id", clientId);
@@ -31,8 +32,7 @@ async function fetchAccessTokenPKCE(clientId, code) {
         body: params
     });
 
-    const { access_token } = await result.json();
-    return access_token;
+    return await result.json();
 }
 
 function generateCodeVerifier(length) {
@@ -57,6 +57,7 @@ async function generateCodeChallenge(codeVerifier) {
 async function getNewTokenPKCE() {
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
+    console.log(code);
 
     if (!code) {
         await redirectToAuthCodeFlow(clientId);
@@ -75,10 +76,11 @@ async function getNewTokenPKCE() {
 async function tokenCheckPKCE() {
     console.log("checking token")
     if ((localStorage.getItem('token_pkce') == null) || ((localStorage.getItem('token_pkce') === 'undefined'))) {
-        console.log("token is null")
+        console.log("token is null or undefined")
         await getNewTokenPKCE();
     }
     else if (Date.now() > localStorage.getItem('token_exp_pkce')) {
+        console.log("token has expired")
         localStorage.removeItem('token_pkce');
         localStorage.removeItem('token_exp_pkce');
         await getNewTokenPKCE();

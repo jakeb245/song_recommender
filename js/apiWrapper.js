@@ -163,7 +163,7 @@ async function addTrackToQueue(id) {
     });
     let obj = await response.json();
     if (obj.error) {
-        alert("error queuing track");
+        alert(`error queuing track: ${obj.error.message}`);
         console.log(obj);
     }
 }

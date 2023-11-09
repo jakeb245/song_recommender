@@ -11,7 +11,7 @@
   "author": "Jacob Buchanan",
   "license": "ISC",
   "dependencies": {
-    "plotly.js-dist": "^2.27.0",
+    "plotly.js": "^2.27.1",
     "vite": "^4.5.0"
   }
 }

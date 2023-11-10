@@ -51,7 +51,7 @@ function displayTracks(track_info) {
     for (let i = 0; i < 3; i++) {
         track_div = document.createElement('div');
         track_div.id = `track${i}`
-        track_div.innerHTML += `<img src="${track_info[i].get('artwork')}" alt="Band photo"><br>`;
+        track_div.innerHTML += `<br><img src="${track_info[i].get('artwork')}" alt="Band photo"><br>`;
         track_div.innerHTML += `<h3 id="title" class="track_info">${track_info[i].get('name')}</h3><br>`;
         track_div.innerHTML += `<p id="artist" class="track_info">${track_info[i].get('artist')}</p><br>`;
         track_div.innerHTML += `<p id="album" class="track_info">${track_info[i].get('album')}</p>`;
@@ -63,7 +63,6 @@ function displayTracks(track_info) {
         track_div.appendChild(queue_button);
         results_div.appendChild(track_div);
     }
-    document.body.appendChild(results_div);
 
 }
 
@@ -92,5 +91,6 @@ async function run() {
         const best_match_info = await getTracksGeneralInfo(match_ids)
         console.log(best_match_info);
         displayTracks(best_match_info);
+        makePlots();
     }
 }

@@ -1,3 +1,11 @@
+let diffs = [];
+let acoustics = [];
+let dances = [];
+let lives = [];
+let instruments = [];
+let energies = [];
+let valences = [];
+
 function findBestMatch(track_features, params) {
     // Given a bunch of tracks' features and some parameters, find the closest match
     // track_features: an array of audio features objects
@@ -22,7 +30,6 @@ function findBestMatch(track_features, params) {
     let track_match_map = new Map();
 
     // Each search has its own features object, so loop through those
-    let diffs = [];
     let i = 0;
     for (let track_set of track_features) {
         for (let track of track_set.audio_features) {
@@ -45,8 +52,6 @@ function findBestMatch(track_features, params) {
     }
 
     console.log(track_match_map);
-
-    plotDiffDistribution(diffs);
 
     // Find top 3 matches from the map
     // Sort by value
@@ -85,4 +90,8 @@ function plotDiffDistribution(diff) {
     }
     Plotly.newPlot(diff_hist_div, [data], [layout]);
     plots_div.appendChild(diff_hist_div);
+}
+
+function makePlots() {
+    plotDiffDistribution(diffs);
 }

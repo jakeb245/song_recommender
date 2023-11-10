@@ -22,6 +22,8 @@ function findBestMatch(track_features, params) {
     let track_match_map = new Map();
 
     // Each search has its own features object, so loop through those
+    let diffs = [];
+    let i = 0;
     for (let track_set of track_features) {
         for (let track of track_set.audio_features) {
             if (track == null) {
@@ -36,13 +38,15 @@ function findBestMatch(track_features, params) {
             }
             diff /= n_params;
             diff = Math.sqrt(diff);
+            diffs[i] = diff;
+            i++;
             track_match_map.set(track.id, diff);
         }
     }
 
     console.log(track_match_map);
 
-    plotDiffDistribution(track_match_map.values());
+    plotDiffDistribution(diffs);
 
     // Find top 3 matches from the map
     // Sort by value
@@ -70,10 +74,15 @@ function plotDiffDistribution(diff) {
     const plots_div = document.getElementById("plots_div");
     const diff_hist_div = document.createElement("div");
     diff_hist_div.id = 'diff_dist'
+    console.log("diff = ", diff);
     const data = {
         x: diff,
-        type: 'histogram'
+        type: 'histogram',
+        name: 'Distribution of difference from request'
     };
-    Plotly.newPlot(diff_hist_div, [data]);
+    const layout = {
+        title: 'Distribution of difference from request'
+    }
+    Plotly.newPlot(diff_hist_div, [data], [layout]);
     plots_div.appendChild(diff_hist_div);
 }

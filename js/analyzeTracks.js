@@ -5,7 +5,7 @@ let lives = [];
 let instruments = [];
 let energies = [];
 let valences = [];
-let data_map;
+const data_map = new Map();
 
 function findBestMatch(track_features, params) {
     // Given a bunch of tracks' features and some parameters, find the closest match
@@ -60,6 +60,19 @@ function findBestMatch(track_features, params) {
         }
     }
 
+    for (let param of num_params) {
+        switch (param) {
+            case param === "acousticness": data_map.set(param, acoustics); break;
+            case param === "danceability": data_map.set(param, dances); break;
+            case param === "liveness": data_map.set(param, lives); break;
+            case param === "instrumentalness": data_map.set(param, instruments); break;
+            case param === "energy": data_map.set(param, energies); break;
+            case param === "valence": data_map.set(param, valences); break;
+        }
+    }
+
+    data_map.set("differences", diffs);
+
     console.log(track_match_map);
 
     // Find top 3 matches from the map
@@ -101,10 +114,9 @@ function plotDistribution(data, name) {
 }
 
 function makePlots() {
-    plotDistribution(diffs);
-    const num_params = ['acousticness', 'danceability', 'liveness', 'instrumentalness', 'energy',
+    const num_params = ['differences', 'acousticness', 'danceability', 'liveness', 'instrumentalness', 'energy',
         'valence'];
     for (let param of num_params) {
-        plotDistribution()
+        plotDistribution(param, data_map.get(param));
     }
 }

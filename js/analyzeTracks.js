@@ -44,12 +44,12 @@ function findBestMatch(track_features, params) {
                     diff += Math.pow(track[param] - input_val, 2);
                 }
                 switch (param) {
-                    case param === "acousticness": acoustics[acoustics.length-1] = track[param]; break;
-                    case param === "danceability": dances[dances.length-1] = track[param]; break;
-                    case param === "liveness": lives[lives.length-1] = track[param]; break;
-                    case param === "instrumentalness": instruments[instruments.length-1] = track[param]; break;
-                    case param === "energy": energies[energies.length-1] = track[param]; break;
-                    case param === "valence": valences[valences.length-1] = track[param]; break;
+                    case (param === "acousticness"): acoustics[acoustics.length] = track[param]; break;
+                    case (param === "danceability"): dances[dances.length] = track[param]; break;
+                    case (param === "liveness"): lives[lives.length] = track[param]; break;
+                    case (param === "instrumentalness"): instruments[instruments.length] = track[param]; break;
+                    case (param === "energy"): energies[energies.length] = track[param]; break;
+                    case (param === "valence"): valences[valences.length] = track[param]; break;
                 }
             }
             diff /= n_params;
@@ -60,18 +60,14 @@ function findBestMatch(track_features, params) {
         }
     }
 
-    for (let param of num_params) {
-        switch (param) {
-            case param === "acousticness": data_map.set(param, acoustics); break;
-            case param === "danceability": data_map.set(param, dances); break;
-            case param === "liveness": data_map.set(param, lives); break;
-            case param === "instrumentalness": data_map.set(param, instruments); break;
-            case param === "energy": data_map.set(param, energies); break;
-            case param === "valence": data_map.set(param, valences); break;
-        }
-    }
-
+    data_map.set("acousticness", acoustics);
+    data_map.set("danceability", dances);
+    data_map.set("liveness", lives);
+    data_map.set("instrumentalness", instruments);
+    data_map.set("energy", energies);
+    data_map.set("valence", valences);
     data_map.set("differences", diffs);
+    console.log(data_map);
 
     console.log(track_match_map);
 
@@ -95,7 +91,7 @@ function findBestMatch(track_features, params) {
     return top_three;
 }
 
-function plotDistribution(data, name) {
+function plotDistribution(name, data) {
     console.log("plotting");
     // plot a probability distribution of the difference values
     const plots_div = document.getElementById("plots_div");
@@ -109,8 +105,8 @@ function plotDistribution(data, name) {
     const layout = {
         title: 'Distribution of difference from request'
     }
-    Plotly.newPlot(diff_hist_div, [inputs], [layout]);
-    plots_div.appendChild(diff_hist_div);
+    Plotly.newPlot(hist_div, [inputs], [layout]);
+    plots_div.appendChild(hist_div);
 }
 
 function makePlots() {

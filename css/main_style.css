@@ -16,7 +16,7 @@ img {
     height: 250px;
 }
 
-.results {
+.results, .plots {
     display: inline-block;
     vertical-align: middle;
     text-align: center;
@@ -27,6 +27,3 @@ img {
     text-align: center;
 }
 
-.plots {
-    align-content: center;
-}

@@ -5,6 +5,7 @@ let lives = [];
 let instruments = [];
 let energies = [];
 let valences = [];
+let data_map;
 
 function findBestMatch(track_features, params) {
     // Given a bunch of tracks' features and some parameters, find the closest match
@@ -42,6 +43,14 @@ function findBestMatch(track_features, params) {
                 if (!isNaN(input_val)) {
                     diff += Math.pow(track[param] - input_val, 2);
                 }
+                switch (param) {
+                    case param === "acousticness": acoustics[acoustics.length-1] = track[param]; break;
+                    case param === "danceability": dances[dances.length-1] = track[param]; break;
+                    case param === "liveness": lives[lives.length-1] = track[param]; break;
+                    case param === "instrumentalness": instruments[instruments.length-1] = track[param]; break;
+                    case param === "energy": energies[energies.length-1] = track[param]; break;
+                    case param === "valence": valences[valences.length-1] = track[param]; break;
+                }
             }
             diff /= n_params;
             diff = Math.sqrt(diff);
@@ -73,25 +82,29 @@ function findBestMatch(track_features, params) {
     return top_three;
 }
 
-function plotDiffDistribution(diff) {
+function plotDistribution(data, name) {
     console.log("plotting");
     // plot a probability distribution of the difference values
     const plots_div = document.getElementById("plots_div");
-    const diff_hist_div = document.createElement("div");
-    diff_hist_div.id = 'diff_dist'
-    console.log("diff = ", diff);
-    const data = {
-        x: diff,
+    const hist_div = document.createElement("div");
+    hist_div.id = `${name}_dist`
+    const inputs = {
+        x: data,
         type: 'histogram',
         name: 'Distribution of difference from request'
     };
     const layout = {
         title: 'Distribution of difference from request'
     }
-    Plotly.newPlot(diff_hist_div, [data], [layout]);
+    Plotly.newPlot(diff_hist_div, [inputs], [layout]);
     plots_div.appendChild(diff_hist_div);
 }
 
 function makePlots() {
-    plotDiffDistribution(diffs);
+    plotDistribution(diffs);
+    const num_params = ['acousticness', 'danceability', 'liveness', 'instrumentalness', 'energy',
+        'valence'];
+    for (let param of num_params) {
+        plotDistribution()
+    }
 }

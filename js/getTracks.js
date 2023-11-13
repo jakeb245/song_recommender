@@ -69,10 +69,14 @@ function displayTracks(track_info) {
 async function run() {
     tokenCheck();
     console.log(`access token = ${localStorage.getItem("token")}`)
-    if (document.getElementById('results')) {
+    if (document.getElementById('outputs_div')) {
         console.log('clearing results');
-        let results_div = document.getElementById('results')
-        results_div.remove();
+        let results_div = document.getElementById('outputs_div')
+        results_div.innerHTML = "<div id=\"results_div\" class=\"results\">\n" +
+            "        </div>\n" +
+            "    \n" +
+            "        <div id=\"plots_div\" class=\"plots\">\n" +
+            "        </div>";
     }
     const inputs = getInputs();
     console.log(inputs);

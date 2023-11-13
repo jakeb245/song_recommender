@@ -100,12 +100,12 @@ function plotDistribution(name, data) {
     const inputs = {
         x: data,
         type: 'histogram',
-        name: 'Distribution of difference from request'
+        name: `${name} distribution`
     };
     const layout = {
-        title: 'Distribution of difference from request'
+        title: `${name} distribution`
     }
-    Plotly.newPlot(hist_div, [inputs], [layout]);
+    Plotly.newPlot(hist_div, [inputs], layout);
     plots_div.appendChild(hist_div);
 }
 

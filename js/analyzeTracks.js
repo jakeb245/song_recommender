@@ -44,12 +44,12 @@ function findBestMatch(track_features, params) {
                     diff += Math.pow(track[param] - input_val, 2);
                 }
                 switch (param) {
-                    case (param === "acousticness"): acoustics[acoustics.length] = track[param]; break;
-                    case (param === "danceability"): dances[dances.length] = track[param]; break;
-                    case (param === "liveness"): lives[lives.length] = track[param]; break;
-                    case (param === "instrumentalness"): instruments[instruments.length] = track[param]; break;
-                    case (param === "energy"): energies[energies.length] = track[param]; break;
-                    case (param === "valence"): valences[valences.length] = track[param]; break;
+                    case ("acousticness"): acoustics[acoustics.length] = track[param]; break;
+                    case ("danceability"): dances[dances.length] = track[param]; break;
+                    case ("liveness"): lives[lives.length] = track[param]; break;
+                    case ("instrumentalness"): instruments[instruments.length] = track[param]; break;
+                    case ("energy"): energies[energies.length] = track[param]; break;
+                    case ("valence"): valences[valences.length] = track[param]; break;
                 }
             }
             diff /= n_params;

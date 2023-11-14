@@ -53,6 +53,7 @@ function displayTracks(track_info) {
         track_div.id = `track${i}`;
         track_div.className = 'track'; // Use className instead of class
         track_div.style.display = 'inline-block'; // Set display style to inline-block
+        track_div.style.alignItems = 'center';
 
         // Create and append the image element
         const imageElement = document.createElement('img');
@@ -93,7 +94,6 @@ function displayTracks(track_info) {
         // Append the infoContainer to the track_div
         track_div.appendChild(infoContainer);
         results_div.appendChild(track_div);
-        results_div.innerHTML += `<br>`
     }
 }
 

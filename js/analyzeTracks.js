@@ -111,10 +111,17 @@ function plotDistribution(name, data) {
         }
     }
     Plotly.newPlot(hist_div, [inputs], layout);
+    hist_div.style.display = "flex";
+    hist_div.style.justifyContent = "center";
+    hist_div.style.alignItems = "center";
     plots_div.appendChild(hist_div);
 }
 
 function makePlots() {
+    const div = document.getElementById("plots_div");
+    const plot_header = document.createElement("h2");
+    plot_header.innerHTML = "<br>Plots:";
+    div.appendChild(plot_header);
     const num_params = ['differences', 'acousticness', 'danceability', 'liveness', 'instrumentalness', 'energy',
         'valence'];
     for (let param of num_params) {

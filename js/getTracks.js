@@ -50,21 +50,51 @@ function displayTracks(track_info) {
     let results_div = document.getElementById("results_div");
     for (let i = 0; i < 3; i++) {
         track_div = document.createElement('div');
-        track_div.id = `track${i}`
-        track_div.class= 'track';
-        track_div.innerHTML += `<img src="${track_info[i].get('artwork')}" alt="Band photo">`;
-        track_div.innerHTML += `<h3 id="title">${track_info[i].get('name')}</h3>`;
-        track_div.innerHTML += `<p id="artist">${track_info[i].get('artist')}</p>`;
-        track_div.innerHTML += `<p id="album">${track_info[i].get('album')}</p>`;
-        const queue_button = document.createElement("button");
+        track_div.id = `track${i}`;
+        track_div.className = 'track'; // Use className instead of class
+        track_div.style.display = 'inline-block'; // Set display style to inline-block
+
+        // Create and append the image element
+        const imageElement = document.createElement('img');
+        imageElement.src = track_info[i].get('artwork');
+        imageElement.alt = 'Band photo';
+        track_div.appendChild(imageElement);
+
+        // Create and append a container for title, artist, album, and button
+        const infoContainer = document.createElement('div');
+        infoContainer.style.display = 'inline-block';
+
+        // Create and append the title element
+        const titleElement = document.createElement('h3');
+        titleElement.id = 'title';
+        titleElement.innerHTML = track_info[i].get('name');
+        infoContainer.appendChild(titleElement);
+
+        // Create and append the artist element
+        const artistElement = document.createElement('p');
+        artistElement.id = 'artist';
+        artistElement.innerHTML = track_info[i].get('artist');
+        infoContainer.appendChild(artistElement);
+
+        // Create and append the album element
+        const albumElement = document.createElement('p');
+        albumElement.id = 'album';
+        albumElement.innerHTML = track_info[i].get('album');
+        infoContainer.appendChild(albumElement);
+
+        // Create and append the button element
+        const queue_button = document.createElement('button');
         queue_button.onclick = async () => {
             await addTrackToQueue(track_info[i].get('uri'));
-        }
-        queue_button.innerHTML = "Add to queue";
-        track_div.appendChild(queue_button);
-        results_div.appendChild(track_div);
-    }
+        };
+        queue_button.innerHTML = 'Add to queue';
+        infoContainer.appendChild(queue_button);
 
+        // Append the infoContainer to the track_div
+        track_div.appendChild(infoContainer);
+        results_div.appendChild(track_div);
+        results_div.innerHTML += `<br>`
+    }
 }
 
 async function run() {

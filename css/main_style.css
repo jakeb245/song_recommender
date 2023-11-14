@@ -20,14 +20,4 @@ img {
     text-align: center;
 }
 
-.outputs {
-    margin-bottom: 20px; /* Add some space between sections for clarity */
-}
-
-.outputs img,
-.outputs h3,
-.outputs p {
-    display: inline-block;
-    vertical-align: middle; /* Align elements vertically in the middle */
-}
 

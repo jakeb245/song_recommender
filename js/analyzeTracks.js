@@ -103,7 +103,12 @@ function plotDistribution(name, data) {
         name: `${name} distribution`
     };
     const layout = {
-        title: `${name} distribution`
+        title: `Distribution of ${name}`,
+        xaxis: {
+            title: {
+                text: name
+            }
+        }
     }
     Plotly.newPlot(hist_div, [inputs], layout);
     plots_div.appendChild(hist_div);

@@ -11,9 +11,19 @@ h1, h2, h3, p {
     color: white;
 }
 
-img {
+img .outputs {
     width: 250px;
     height: 250px;
+}
+
+#spotify_logo {
+    width: 236px;
+    height: 71px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 .plots h2 {

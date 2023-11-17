@@ -98,8 +98,9 @@ function displayTracks(track_info) {
 }
 
 async function run() {
+    // Check for token
     tokenCheck();
-    console.log(`access token = ${localStorage.getItem("token")}`)
+    // Clear outputs if rerunning
     if (document.getElementById('outputs_div')) {
         console.log('clearing results');
         let results_div = document.getElementById('outputs_div')
@@ -109,15 +110,19 @@ async function run() {
             "        <div id=\"plots_div\" class=\"plots\">\n" +
             "        </div>";
     }
+    // get user inputs
     const inputs = getInputs();
-    console.log(inputs);
     if (inputs != null) {
+        // get sample tracks
         let sample_tracks = await getSampleTracks(inputs);
         console.log(sample_tracks);
+        // get features of those tracks
         const tracks_info = await getTracksFeatures(sample_tracks);
         console.log(tracks_info);
+        // Calculate differences and find lowest 3
         const best_matches = findBestMatch(tracks_info, inputs);
         console.log(best_matches);
+        // Get track IDs
         const match_ids = []
         for (let i = 0; i < best_matches.length; i++) {
             match_ids[i] = best_matches[i][1][0];

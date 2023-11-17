@@ -36,6 +36,7 @@ function tokenCheck() {
         localStorage.removeItem('token_exp');
         getNewToken();
     }
+    console.log('access token =', localStorage.getItem('token'));
 }
 
 tokenCheck()  // If using client credentials flow, uncomment this
